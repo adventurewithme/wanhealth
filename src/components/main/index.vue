@@ -43,6 +43,7 @@ require("echarts/lib/chart/pie");
 require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
+require("echarts/lib/component/legendScroll");
 export default {
   name: "indexssss",
   data() {
@@ -98,32 +99,30 @@ export default {
   methods: {
     montheahcrt() {
       var that = this;
-      var monthseries=that.monthseries();
+      var monthseries = that.monthseries();
       var myechart = echarts.init(document.getElementById("monthorder"));
       myechart.setOption({
-        title: { subtext: that.monthlist.time,x:'center' },
-        tooltip: { trigger: "item", formatter: "{a} <br/>{b} : {c} ({d}%)" },
-        xAxis: {
-          data: that.monthlist.monthdata
+        title: {
+          subtext: that.monthlist.time,
+          x: "center"
         },
-        yAxis: {},
-        lenged: {
+        tooltip: {formatter: "{a} <br/>{b} : {c} ({d}%)" },
+        legend: {
           type: "scroll",
           orient: "vertical",
-          right: 0,
+          left: 0,
           top: 0,
           bottom: 20,
-          data:monthseries.legendData,
-          selected:monthseries.selected
+          data: monthseries.legendData,
+          selected: monthseries.selected
         },
         series: [
           {
-            name:'',
+            name: "",
             type: "pie",
             radius: "45%",
-            center: ["60%", "50%"],
-            // data: that.monthlist.precent
-            data:monthseries.seriesData
+            center: ["70%", "50%"],
+            data: monthseries.seriesData
           }
         ]
       });
