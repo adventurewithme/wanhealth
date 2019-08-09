@@ -34,3 +34,4 @@ npm install
 npm i element-ui -S
 npm install --save-dev sass-loader
 npm install -save-dev node-sass
+npm install echarts --save

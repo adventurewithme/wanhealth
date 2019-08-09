@@ -6,7 +6,11 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en'
+// import echarts from 'echarts'
+// let echarts = require('echarts/lib/echarts')
+// require('echarts/lib/chart/pie')
 
+// Vue.prototype.$echarts = echarts
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 /* eslint-disable no-new */

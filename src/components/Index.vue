@@ -1,14 +1,20 @@
 <template>
   <div class="hello">
     <el-row>
-      <el-col :span="4">
-        <el-container class>
+      <el-col :span="4" class="index_left">
+        <el-container>
           <Nav></Nav>
         </el-container>
       </el-col>
-      <el-col :span="20">
-        <el-container>
+      <el-col :span="20" class="index_right">
+        <el-container style="height:50px;">
           <Header></Header>
+        </el-container>
+        <el-container>
+          <Bread></Bread>
+        </el-container>
+        <el-container class="index_main">
+          <router-view/>
         </el-container>
       </el-col>
     </el-row>
@@ -18,11 +24,13 @@
 <script>
 import Header from "@/common/header";
 import Nav from "@/common/nav";
+import Bread from '@/common/bread'
 export default {
   name: "HelloWorld",
   components: {
     Header,
-    Nav
+    Nav,
+    Bread
   },
   data() {
     return {};
@@ -31,5 +39,20 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
+<style lang="scss" scoped>
+.index_left{
+  position: fixed;
+  min-height: 100vh;
+}
+.index_right{
+  position: fixed;
+  right: 0;
+}
+.index_main{
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow: scroll;
+}
 </style>
+

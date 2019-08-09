@@ -1,6 +1,6 @@
 <template>
   <!-- <el-container> -->
-    <el-header height="50px" class="header">
+    <el-header height="50px" class="header nav">
       <el-row>
         <el-col :span="20">
           <img :src="navshow" alt class="nav" />
@@ -36,13 +36,17 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+ <style lang="scss" scoped>
 .header {
   line-height: 50px;
   font-size: 14px;
   color: #666;
   width: 100%;
   border-bottom: 1px solid #f2f2f2;
+    // position: fixed;
+    top: 0;
+    z-index: 999;
+    background: #fff;
   .nav {
     width: 20px;
     height: 20px;
