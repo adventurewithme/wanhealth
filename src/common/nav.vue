@@ -1,14 +1,17 @@
 <template>
   <el-aside width="100%" class="nav">
+    <div class="nav_logo">
+      <img :src="logo" />
+    </div>
     <!-- <el-menu :default-openeds="['1', '3']"> -->
-    <el-menu>
+    <el-menu :default-active="$route-path">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-message"></i>商品管理
         </template>
         <el-menu-item-group>
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="1-1">品牌管理</el-menu-item>
+          <el-menu-item index="1-1" route="{path:'/brand'}">品牌管理</el-menu-item>
           <el-menu-item index="1-2">规格管理</el-menu-item>
           <el-menu-item index="1-3">类型管理</el-menu-item>
           <el-menu-item index="1-4">分类管理</el-menu-item>
@@ -141,14 +144,28 @@
   </el-aside>
 </template>
 <script>
+import logo from "@/assets/logo.png";
 export default {
-  name: "navs"
+  name: "navs",
+  data() {
+    return {
+      logo
+    };
+  }
 };
 </script>
 <style lang="scss" scoped>
 .nav {
-  background: #304156;
+  background: #263445;
   height: 100vh;
+  .nav_logo{
+    text-align: center;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    margin: 20px 0;
+  }
   .el-menu {
     background-color: #263445;
     border-right: none;
@@ -167,7 +184,7 @@ export default {
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #606A78;
+  background: #606a78;
 }
 </style>
 <style lang="scss">

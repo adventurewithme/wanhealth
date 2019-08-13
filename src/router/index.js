@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
-import indexs from '@/components/main/index'
+import indexs from '@/components/main/index';
+import Brand from '@/components/main/brand'
 // import { resolve } from 'dns';
 
 
@@ -18,6 +19,10 @@ export default new Router({
         path:'/',
         name:'Indexs',
         component: indexs
+      },{
+          path: '/brand',
+          name: 'brand',
+          component: Brand
       }]
     }
   ]

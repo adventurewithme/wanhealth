@@ -1,7 +1,7 @@
 <template>
   <div class="indexs">
     <el-row>
-      <el-col :span="11">
+      <el-col :span="12">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>今日新增订单</span>
@@ -9,7 +9,7 @@
           <div v-for="(i,index) in todaylist" :key="index" class="text item">{{ i.name+':'+i.num }}</div>
         </el-card>
       </el-col>
-      <el-col :span="11">
+      <el-col :span="12">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>待处理事宜</span>
@@ -17,7 +17,7 @@
           <div v-for="(i,index) in waitlist" :key="index" class="text item">{{ i.name+':'+i.num }}个</div>
         </el-card>
       </el-col>
-      <el-col :span="11">
+      <el-col :span="12">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>本月订单概况更多</span>
@@ -26,12 +26,15 @@
           <div id="monthorder" style="width:100%;height:300px"></div>
         </el-card>
       </el-col>
-      <el-col :span="11">
+      <el-col :span="12">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>今日新增订单</span>
+            <span>本月商品PV曲线</span>
+            <el-button style="float: right; padding: 3px 0" type="text">查看更多</el-button>
           </div>
-          <div v-for="(i,index) in todaylist" :key="index" class="text item">{{ i.name+':'+i.num }}</div>
+          <div class="pc_f">
+            <div id="monthpv" style="width:100%;height:300px"></div>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -40,6 +43,7 @@
 <script>
 var echarts = require("echarts/lib/echarts");
 require("echarts/lib/chart/pie");
+require("echarts/lib/chart/line");
 require("echarts/lib/component/tooltip");
 require("echarts/lib/component/title");
 require("echarts/lib/component/legend");
@@ -88,12 +92,14 @@ export default {
         time: "2018.01.01-2019.09.01",
         precent: [0, 10, 12, 15, 30, 1],
         total: 88
-      }
+      },
+      monthpvlist: [1,2,3,5,6,9,10,23,56,9,0,0,0,0,0]
     };
   },
   created() {
     this.$nextTick(function() {
       this.montheahcrt();
+      this.monthpv();
     });
   },
   methods: {
@@ -106,7 +112,7 @@ export default {
           subtext: that.monthlist.time,
           x: "center"
         },
-        tooltip: {formatter: "{a} <br/>{b} : {c} ({d}%)" },
+        tooltip: { formatter: "{b} : {c} ({d}%)" },
         legend: {
           type: "scroll",
           orient: "vertical",
@@ -145,6 +151,38 @@ export default {
         selected,
         legendData
       };
+    },
+    monthpv() {
+      var that=this;
+      var monthpvs = echarts.init(document.getElementById("monthpv"));
+      var xaxisdata=[];
+      for (var i = 0; i < that.getdays(); i++) {
+        xaxisdata[i]=i
+      }
+
+      monthpvs.setOption({
+        xAxis: {
+          type: "category",
+          data: xaxisdata
+        },
+        tooltip: { formatter: "{b}日<br> 浏览量：{c} " },
+        yAxis: {
+          type: "value"
+        },
+        series: [
+          {
+            data: that.monthpvlist,
+            type: "line"
+          }
+        ]
+      });
+    },
+    getdays() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var d = new Date(year, month, 0);
+      return d.getDate();
     }
   }
 };
@@ -152,8 +190,12 @@ export default {
 <style lang="scss" scoped>
 .indexs {
   width: 100%;
-  .el-col {
-    margin: 10px 2%;
+  .el-col:nth-child(2n){
+    float: right;
+    // margin: 10px 2%;
+  }
+  .el-col-12{
+    width: 49%;
   }
 }
 </style>

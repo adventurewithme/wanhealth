@@ -49,7 +49,7 @@ export default {
   right: 0;
 }
 .index_main{
-  padding: 10px;
+  padding: 10px 20px;
   box-sizing: border-box;
   max-height: 90vh;
   overflow: scroll;
